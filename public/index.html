@@ -1,47 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Simple Uploader using express.js by Afidev">
-    <meta property="og:image" content="https://k.top4top.io/p_20648gkga1.jpg">
-    <link rel="icon" href="https://k.top4top.io/p_20648gkga1.jpg">
-    <link rel="shortcut icon" href="https://k.top4top.io/p_20648gkga1.jpg">
-    <title>Afidev Uploader</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+   <link rel="stylesheet" href="/css/style.css">
+   <title>Image Uploader</title>
 </head>
+
 <body>
-    <div class="register flex justify-center items-center w-screen h-screen bg-slate-300">
-        <div class="w-[350px] px-8 py-6 bg-white rounded-md shadow-sm pb-12 pt-12">
+   <div class="wrapper">
+      <header>Image Uploader</header>
+      <form>
+         <input type="file" class="file-input" name="file" hidden>
+         <i class='fas fa-cloud-upload-alt'></i>
+         <p>Browse file to upload</p>
+      </form>
+      <section class="progress"></section>
 
-            <h2 class="text-2xl font-bold text-center text-slate-500">Single Uploader</h2>
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <div class="flex flex-col gap-1 mb-4 pt-4">
-                    <label class="text-slate-500" for="file">Select file:</label>
-                    <div class="text-slate-500 border flex justify-between pl-2 items-center bg-[#f9f9f9] rounded-md outline-0 overflow-hidden">
-                        <span id="text">image</span>
-                        <label class="p-2 text-white cursor-pointer bg-blue-500" for="file">Browser</label>
-                    </div>
-                    <input type="file" id="file" class="hidden" name="file">
-                </div>
-                <button type="submit" class="px-5 w-full py-2 text-white rounded-sm bg-blue-500 hover:bg-blue-600">Upload</button>
-            </form>
+      <section class="uploaded"></section>
 
-            <h2 class="text-2xl font-bold text-center text-slate-500 pt-12">Multi Uploader</h2>
-            <form action="/multi-upload" method="POST" enctype="multipart/form-data">
-                <div class="flex flex-col gap-1 mb-4 pt-4">
-                    <label class="text-slate-500" for="files">Select file:</label>
-                    <div class="text-slate-500 border flex justify-between pl-2 items-center bg-[#f9f9f9] rounded-md outline-0 overflow-hidden">
-                        <span id="text">images</span>
-                        <label class="p-2 text-white cursor-pointer bg-blue-500" for="files">Browser</label>
-                    </div>
-                    <input type="file" id="files" class="hidden" name="files" multiple>
-                </div>
-                <button type="submit" class="px-5 w-full py-2 text-white rounded-sm bg-blue-500 hover:bg-blue-600">Upload</button>
-            </form>
-
-        </div>
-    </div>
+      <footer>
+         <p>Made With 💓 by Affidev.</p>
+      </footer>
+   </div>
+   <script src="/js/script.js"></script>
 </body>
+
 </html>

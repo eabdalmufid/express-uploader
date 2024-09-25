@@ -5,12 +5,24 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const cron = require('node-cron');
 const secure = require('ssl-express-www');
 const app = express()
 const port = process.env.PORT || 8000
 
 // Cretae folder
 if (!fs.existsSync('./public/file')) fs.mkdirSync('./public/file')
+
+const config = {
+  autoDeleteFiles: true // false
+};
+
+function deleteFiles() {
+  if (config.autoDeleteFiles) {
+    fs.rmSync(path.join(process.cwd(), 'public/file'), { recursive: true, force: true });
+  }
+}
+cron.schedule('0 0 0 * * *', deleteFiles);
 
 function makeid(length) {
     let result = '';
@@ -25,7 +37,7 @@ function makeid(length) {
 
 app.set('json spaces', 2)
 app.use(cors())
-//app.use(logger('dev'))
+app.use(logger('dev'))
 app.use(secure)
 app.use(express.json())
 app.use(express.static('public'))
@@ -64,13 +76,13 @@ app.post('/upload', upload.single('file'), (req, res) => {
     })
     res.status(200).json({
         status: true,
-        message: "Created by afidev",
+        message: "Created by affidev",
         result: {
             originalname: req.file.originalname,
             encoding: req.file.encoding,
             mimetype: req.file.mimetype,
             size: req.file.size,
-            url: "https://" + req.hostname + "/file/" + req.file.filename
+            url: req.protocol + "://" + req.get("host") + "/file/" + req.file.filename
         }
     })
 }, (error, req, res, next) => {
@@ -91,12 +103,12 @@ app.post('/multi-upload', upload.array('files', 10), (req, res) => {
             encoding: v.encoding,
             mimetype: v.mimetype,
             size: v.size,
-            url: "https://" + req.hostname + "/file/" + v.filename
+            url: req.protocol + "://" + req.get("host") + "/file/" + v.filename
         })
     });
     res.status(200).json({
         status: true,
-        message: "Created by afidev",
+        message: "Created by affidev",
         result: result
     })
 })
